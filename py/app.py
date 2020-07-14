@@ -139,13 +139,12 @@ def load_oso():
     ## ABAC policy
     oso.load_file(policy_path / "abac.polar")
 
-    oso.load_file("my_policy.polar")
     return oso
 
 
 if __name__ == "__main__":
     """Loads and checks the policy.
-    
+
     Run example with `python app.py repl` to run the REPL after loading
     the policy.
     """
