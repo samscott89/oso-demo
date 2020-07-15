@@ -41,8 +41,8 @@ query with authorization questions (e.g., "Can Alice view a particular expense?"
 ```py
 # should return true because Alice submitted Expense{id: 0}
 oso.allow(User.by_name("alice"), "view", Expense.by_id(0))
-# should return false because Bhavik can't see expenses submitted by Alice.
-oso.allow(User.by_name("bhavik"), "view", Expense.by_id(0))
+# should return false because Alice can't see expenses submitted by Bhavik.
+oso.allow(User.by_name("alice"), "view", Expense.by_id(1))
 ```
 
 Could you describe what just happened?
