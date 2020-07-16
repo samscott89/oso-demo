@@ -3,20 +3,10 @@ allow(actor: User, "view", resource: Expense) if
     resource.submitted_by = actor.name;
 
 
-#### TEST
-?= allow(new User { name: "alice"}, "view", new Expense {  id: 0});
-###
-
-
 # Accountants can view expenses from their location
 allow(actor: User, "view", resource: Expense) if
     role(actor, "accountant") and
     actor.location = resource.location;
-
-# TEST: As an accountant, deirdre can view expenses in the same location
-?= allow(new User { name: "deirdre"}, "view", new Expense { id: 0 });
-#
-
 
 
 ### RBAC Hierarchy
@@ -35,10 +25,6 @@ role(actor: User, role, team: Team) if
     role(actor, role, new Organization { id: team.organization_id });
 
 
-# TEST: As an admin of ACME, Bhavik can view expenses in the org
-?= allow(new User { name: "bhavik" }, "view", new Expense { id: 0 });
-
-
 # Management hierarchies
 allow(actor: User, "view", resource: Expense) if
     manages(actor, employee) and
@@ -48,11 +34,7 @@ manages(manager: User, employee) if
     employee = manager.employees() or
     manages(manager.employees(), employee);
 
-# TEST: Now Cora can view the expense because Cora manager Bhavik who manager Alice
-?= allow(new User { name: "cora"}, "view", new Expense { id: 0 });
-
 # If ENV="development" is set as an environment variable
 # Then allow all
 allow(_user, _action, _resource) if
     new Env{}.var("ENV") = "development";
-

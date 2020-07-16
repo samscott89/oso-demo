@@ -4,6 +4,11 @@
 
 Outline:
 
+Dependencies:
+
+- You can get oso from pypi. For example by `pip install --user oso`, or create a virtualenv and install.
+- oso requires Python >= 3.6. If you are using version 3.6. You will also need to install `dataclasses`.
+
 In the terminal, run
 
 ```py
@@ -27,6 +32,8 @@ Which can be accessed through the `User` class:
 ```py
 >>> User.by_name("bhavik")
 <app.User object at 0x7fae2e0dfc10>
+>>> print(User.by_name("bhavik"))
+User: bhavik, role: employee at location: London
 >>> User.by_name("bhavik").role
 'employee'
 ```
@@ -35,6 +42,22 @@ There are other classes defined in the `app.py` file, such as the `Expense` clas
 
 Finally, we have an `oso` instance -- the authorization runtime embedded in our application -- that we can
 query with authorization questions (e.g., "Can Alice view a particular expense?")
+
+You can see that the above Python classes are all _registered_ with oso:
+
+```py
+>>> from pprint import pprint; pprint(oso.classes)
+{'Datetime': <class 'datetime.datetime'>,
+ 'Env': <class 'app.Env'>,
+ 'Expense': <class 'app.Expense'>,
+ 'Http': <class 'polar.extras.Http'>,
+ 'Organization': <class 'app.Organization'>,
+ 'PathMapper': <class 'polar.extras.PathMapper'>,
+ 'Project': <class 'app.Project'>,
+ 'Team': <class 'app.Team'>,
+ 'Timedelta': <class 'datetime.timedelta'>,
+ 'User': <class 'app.User'>}
+```
 
 ## Quick example of oso in action
 

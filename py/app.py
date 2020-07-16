@@ -49,10 +49,8 @@ class User:
                 yield User.by_name(name)
 
     def __str__(self):
-        return f"<User: {self.name}, role: {self.role} at location: {self.location}>"
+        return f"User: {self.name}, role: {self.role} at location: {self.location}"
 
-    def __repr__(self):
-        return str(self)
 
 @polar_class(from_polar="by_id")
 class Expense:
@@ -72,10 +70,8 @@ class Expense:
             return Expense()
 
     def __str__(self):
-        return f"<Expense submitted by {self.submitted_by} at location {self.location} for amount {self.amount}>"
+        return f"Expense submitted by {self.submitted_by} at location {self.location} for amount {self.amount}"
 
-    def __repr__(self):
-        return str(self)
 
 @polar_class(from_polar="by_id")
 class Project:
@@ -134,9 +130,9 @@ def load_oso():
     """Loads and returns the oso policy"""
     oso = Oso()
     policy_path = Path(__file__).resolve().parent.parent / "policies"
-    ## Role definitions
+    # Role definitions
     oso.load_file(policy_path / "rbac.polar")
-    ## ABAC policy
+    # ABAC policy
     oso.load_file(policy_path / "abac.polar")
 
     return oso
@@ -154,4 +150,3 @@ if __name__ == "__main__":
 
     if len(sys.argv) > 1 and sys.argv[1] == "repl":
         oso.repl()
-
