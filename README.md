@@ -6,14 +6,14 @@ Outline:
 
 Dependencies:
 
-- You can get oso from pypi. For example by `pip install --user oso`, or create a virtualenv and install.
+- You can get oso from pypi. For example by `pip3 install --user oso`, or create a virtualenv and install.
 - oso requires Python >= 3.6. If you are using version 3.6. You will also need to install `dataclasses`.
 
 In the terminal, run
 
 ```py
 cd py
-python3.8
+python3
 >>> from app import *
 >>> oso = load_oso()
 ```
